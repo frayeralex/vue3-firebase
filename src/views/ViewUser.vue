@@ -10,15 +10,15 @@
       <li class="collection-item">{{ position }}</li>
     </ul>
     <router-link to="/" class="btn grey waves-effect waves-light"
-    >Back</router-link
+      >Back</router-link
     >
     <button @click="openModal" class="btn red waves-effect waves-light">
       Delete
     </button>
     <div class="fixed-action-btn">
       <router-link
-              :to="{ name: 'editUser', params: { userId: $route.params.userId } }"
-              class="btn-floating btn-large red"
+        :to="{ name: 'editUser', params: { userId: $route.params.userId } }"
+        class="btn-floating btn-large red"
       >
         <i class="fa fa-pencil"></i>
       </router-link>

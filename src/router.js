@@ -16,8 +16,7 @@ export default new Router({
     {
       path: "/auth",
       name: "auth",
-      component: () =>
-        import(/* webpackChunkName: "auth" */ "./views/Auth.vue")
+      component: () => import(/* webpackChunkName: "auth" */ "./views/Auth.vue")
     },
     {
       path: "/upload",

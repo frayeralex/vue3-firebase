@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-    <nav>
-      <div class="nav-wrapper green">
-				<router-link class="brand-logo" to="/"> Vue + Firebase</router-link>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><router-link to="/auth">Auth</router-link></li>
-
-				</ul>
-      </div>
-    </nav>
+		<NavBar/>
     <div class="container">
       <router-view />
     </div>
   </div>
 </template>
+
+<script>
+	import NavBar from './components/Navbar'
+	export default {
+		name: "App",
+		components: {
+			NavBar
+		}
+	}
+</script>
 
 <style lang="scss">
 .btn {

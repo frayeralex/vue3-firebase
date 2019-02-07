@@ -20,6 +20,12 @@ export default new Router({
         import(/* webpackChunkName: "auth" */ "./views/Auth.vue")
     },
     {
+      path: "/upload",
+      name: "upload",
+      component: () =>
+        import(/* webpackChunkName: "upload" */ "./views/Upload.vue")
+    },
+    {
       path: "/users/new",
       name: "newUser",
       component: () =>

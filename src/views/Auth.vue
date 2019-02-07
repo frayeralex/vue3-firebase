@@ -35,13 +35,14 @@
 			<button class="btn" type="submit">Submit</button>
 			<button @click="toggleAuthMode" class="btn grey" type="button">{{ !isSignInMode ? 'Login' : 'Register' }}</button>
 			<button @click="loginWithFB" class="btn" type="button">Continue with facebook</button>
+			<button @click="loginWithGoogle" class="btn" type="button">Continue with google</button>
 		</form>
 
 	</div>
 </template>
 
 <script>
-import { auth, FBProvider } from "../services/firebase";
+import { auth, FBProvider, GoogleProvider } from "../services/firebase";
 
 export default {
 	name: "Auth",
@@ -60,6 +61,8 @@ export default {
 		FBProvider.setCustomParameters({
 			'display': 'popup'
 		});
+		GoogleProvider.addScope('profile');
+		GoogleProvider.addScope('email');
 		auth.onAuthStateChanged(this.onAuthStateChangedHandler.bind(this))
 	},
 	methods: {
@@ -82,13 +85,17 @@ export default {
 		},
 		async loginWithFB() {
 			try {
-				const result = await auth.signInWithPopup(FBProvider);
-				// eslint-disable-next-line
-				console.log({ result });
+				await auth.signInWithPopup(FBProvider);
 			} catch (e) {
 				M.toast({ html: e.message });
 			}
-
+		},
+		async loginWithGoogle() {
+			try {
+				 await auth.signInWithPopup(GoogleProvider);
+			} catch (e) {
+				M.toast({ html: e.message });
+			}
 		},
 		async handleAuth() {
 			this.isSignInMode
@@ -97,18 +104,14 @@ export default {
 		},
 		async registerRequest() {
 			try {
-				const result = await auth.createUserWithEmailAndPassword(this.email, this.password);
-				// eslint-disable-next-line
-				console.log({ result });
+				await auth.createUserWithEmailAndPassword(this.email, this.password);
 			} catch (e) {
 				M.toast({ html: e.message });
 			}
 		},
 		async loginRequest() {
 			try {
-				const result = await auth.signInWithEmailAndPassword(this.email, this.password);
-				// eslint-disable-next-line
-				console.log({ result });
+				await auth.signInWithEmailAndPassword(this.email, this.password);
 			} catch (e) {
 				M.toast({ html: e.message });
 			}

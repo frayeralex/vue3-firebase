@@ -2,9 +2,11 @@
   <div id="app">
     <nav>
       <div class="nav-wrapper green">
-        <div class="container">
-          <router-link class="brand-logo" to="/"> Vue + Firebase</router-link>
-        </div>
+				<router-link class="brand-logo" to="/"> Vue + Firebase</router-link>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><router-link to="/auth">Auth</router-link></li>
+
+				</ul>
       </div>
     </nav>
     <div class="container">

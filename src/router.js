@@ -14,6 +14,12 @@ export default new Router({
       component: Dashboard
     },
     {
+      path: "/auth",
+      name: "auth",
+      component: () =>
+        import(/* webpackChunkName: "auth" */ "./views/Auth.vue")
+    },
+    {
       path: "/users/new",
       name: "newUser",
       component: () =>

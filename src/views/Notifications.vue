@@ -35,7 +35,8 @@
 </template>
 
 <script>
-import { RTDatabase } from "../services/firebase";
+import firebase from "firebase";
+import { RTDatabase, auth } from "../services/firebase";
 
 export default {
   name: "Notifications",
@@ -46,9 +47,25 @@ export default {
     };
   },
   mounted() {
-    const usersRef = RTDatabase.ref("/users");
-    usersRef.on("value", this.handleUsersSubscriptionUpdates.bind(this));
+    this.usersRef = RTDatabase.ref("/users").orderByChild('likes');
+    this.usersRef.on("value", this.handleUsersSubscriptionUpdates.bind(this));
+    if (auth.currentUser) {
+      const myConnectionsRef = RTDatabase.ref(`users/${auth.currentUser.uid}/connections`);
+      const lastOnlineRef = firebase.database().ref(`users/${auth.currentUser.uid}/lastOnline`);
+      const connectedRef = RTDatabase.ref('.info/connected');
+      connectedRef.on('value', function(snap) {
+        if (snap.val() === true) {
+          const con = myConnectionsRef.push();
+          con.onDisconnect().remove();
+          con.set(true);
+          lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
+        }
+      });
+		}
   },
+	beforeDestroy() {
+    this.usersRef.off();
+	},
   methods: {
     handleUsersSubscriptionUpdates(snapshot) {
       const users = [];

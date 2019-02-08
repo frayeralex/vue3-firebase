@@ -10,4 +10,6 @@ export const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 
 export const storage = new firebase.storage();
 
+export const RecaptchaVerifier = firebase.auth.RecaptchaVerifier;
+
 export default firebaseApp.firestore();

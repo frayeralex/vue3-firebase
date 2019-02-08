@@ -9,12 +9,14 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><router-link to="/auth">Auth</router-link></li>
           <li><router-link to="/upload">Upload</router-link></li>
+          <li><router-link to="/notifications">Notifications</router-link></li>
         </ul>
       </div>
     </nav>
     <ul class="sidenav" id="mobile-sidebar">
       <li><router-link to="/auth">Auth</router-link></li>
       <li><router-link to="/upload">Upload</router-link></li>
+      <li><router-link to="/notifications">Notifications</router-link></li>
     </ul>
   </div>
 </template>

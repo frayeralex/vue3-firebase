@@ -19,6 +19,12 @@ export default new Router({
       component: () => import(/* webpackChunkName: "auth" */ "./views/Auth.vue")
     },
     {
+      path: "/notifications",
+      name: "notifications",
+      component: () =>
+        import(/* webpackChunkName: "notifications" */ "./views/Notifications.vue")
+    },
+    {
       path: "/upload",
       name: "upload",
       component: () =>

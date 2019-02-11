@@ -42,6 +42,7 @@
 
 <script>
 import api from "../services/api";
+import { auth } from "../services/firebase";
 
 export default {
   name: "NewUser",
@@ -60,7 +61,8 @@ export default {
           name: this.name,
           email: this.email,
           user_id: this.userId,
-          position: this.position
+          position: this.position,
+          ownerID: auth.currentUser.uid
         });
         this.$router.push("/");
       } catch (e) {

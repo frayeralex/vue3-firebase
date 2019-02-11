@@ -1,4 +1,4 @@
-import db from "./firebase";
+import db, { auth } from "./firebase";
 
 const COLLECTIONS = {
   USERS: "users"
@@ -10,7 +10,10 @@ const mapCollectionData = item => ({
 });
 
 export const getUsers = async () => {
-  const querySnapshot = await db.collection(COLLECTIONS.USERS).get();
+  const querySnapshot = await db
+    .collection(COLLECTIONS.USERS)
+    .where('ownerID', '==', auth.currentUser.uid)
+    .get();
   const result = [];
   querySnapshot.forEach(item => {
     result.push(mapCollectionData(item));

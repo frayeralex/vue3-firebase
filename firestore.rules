@@ -1,0 +1,35 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userID} {
+    	function isNameValid() {
+      	return request.resource.data.name is string;
+      }
+      function isEmailValid() {
+      	return request.resource.data.email is string;
+      }
+      function isPositionValid() {
+      	return request.resource.data.position is string;
+      }
+      function isUserIdValid() {
+      	return request.resource.data.user_id is string;
+      }
+      
+    	allow read: if request.auth.uid == resource.data.ownerID;
+      
+      allow create: if request.resource.data.ownerID == request.auth.uid &&
+      isNameValid() &&
+      isEmailValid() &&
+      isPositionValid() &&
+      isUserIdValid();
+      
+      allow update: if resource.data.ownerID == request.auth.uid &&
+      request.resource.data.ownerID == resource.data.ownerID &&
+      isNameValid() &&
+      isEmailValid() &&
+      isPositionValid() &&
+      isUserIdValid();
+      
+      allow delete: if true || resource.data.ownerID == request.auth.uid;
+    }
+  }
+}

@@ -14,4 +14,6 @@ export const RecaptchaVerifier = firebase.auth.RecaptchaVerifier;
 
 export const RTDatabase = firebase.database();
 
+export const functions = firebase.functions();
+
 export default firebaseApp.firestore();

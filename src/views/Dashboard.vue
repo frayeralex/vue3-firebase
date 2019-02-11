@@ -30,6 +30,7 @@
 // @ is an alias to /src
 import Spinner from "../components/Spinner";
 import { getUsers } from "../services/api";
+import { functions } from "../services/firebase";
 
 export default {
   name: "home",
@@ -47,6 +48,8 @@ export default {
     const users = await getUsers();
     this.users = users;
     this.isRequestingUsers = false;
+    const helloWorldFunction = functions.httpsCallable('helloWorld');
+    await helloWorldFunction();
   }
 };
 </script>
